@@ -31,7 +31,7 @@ export const questionSlice = createSlice({
 });
 
 // Actions
-export const usersActions = () => async (dispatch) => {
+export const getAllQuestions = () => async (dispatch) => {
   dispatch(questionsLoading());
   try {
     const response = await API._getQuestions();

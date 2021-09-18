@@ -36,11 +36,11 @@ export const usersSlice = createSlice({
 });
 
 // Actions
-export const usersActions = () => async (dispatch) => {
+export const getAllUsers = () => async (dispatch) => {
   dispatch(usersLoading());
   try {
     const response = await API._getUsers();
-  
+
     console.log(response);
     dispatch(usersSuccess(response));
   } catch (error) {
