@@ -1,19 +1,32 @@
 # Would You Rather Project
+ It's a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
 
-This project is bootstraped [Create React App](https://github.com/facebook/create-react-app) to and React/ReduxToolkit.
+users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard
 
-## To run the program
+Once the user logs in, the user should be able to toggle between his/her answered and unanswered polls on the home page, which is located at the root. The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom). The unanswered questions should be shown by default, and the name of the logged in user should be visible on the page.
+
+What would be the point of seeing answered and unanswered polling questions if we couldn’t actually vote or see the results? Each polling question should link to the details of that poll. The details of each poll should be available at questions/:question_id.
+
+## Technologies used
+. React
+. ReduxToolkit
+. React-Bootstrap
+. React Router
+
+## To run the locally
 
 `just npm to install packages and depencies`
 
 `npm to install`
 
 or
+
 `yarn packages and depencies`
 
 `yarn`
 
-## Data
+After that open [local host](https://locahost:3000) in your browser to view
+## DB Notice
 
 The `_DATA.js` file represents a fake database and methods that let you access the data.
 
@@ -103,6 +116,9 @@ _Parameters_: Object that contains the following properties: `authedUser`, `qid`
 | authedUser | String | The id of the user who answered the question                                            |
 | qid        | String | The id of the question that was answered                                                |
 | answer     | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"` |
+
+## About Create React App
+This project is bootstraped [Create React App](https://github.com/facebook/create-react-app) to and React/ReduxToolkit.
 
 ## Contributing
 

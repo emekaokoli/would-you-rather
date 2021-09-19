@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react';
 import {useDispatch} from 'react-redux'
-import {getAllQuestions} from './redux/questions.slices.reducers'
-import {getAllUsers} from './redux/users.slice.reducers'
+import {getAllQuestions} from './redux/questions.slice.reducers'
 import './App.css';
 
 
@@ -10,7 +9,6 @@ const dispatch = useDispatch()
 
 
   useEffect(() => {
-   dispatch(getAllUsers())
    dispatch(getAllQuestions());
   }, [dispatch])
 

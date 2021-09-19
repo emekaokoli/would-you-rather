@@ -1,17 +1,18 @@
-import * as API from '../services/_DATA';
 import { createSlice } from '@reduxjs/toolkit';
-
-export const usersSlice = createSlice({
-  name: 'Fetch_Users',
-  initialState: {
+import { addQuestion,addAnswer } from './questions.slice.reducers';
+const initialState = {
     loading: true,
     error: null,
     isLogedIn: false,
     users: [],
-  },
+  }
+
+export const usersSlice = createSlice({
+  name: 'USERS',
+  initialState,
 
   reducers: {
-    usersLoading: (state, action) => {
+    receieveUsersLoading: (state, action) => {
       if (state.loading) {
         state.loading = true;
         state.error = null;
@@ -19,36 +20,43 @@ export const usersSlice = createSlice({
         state.users = [];
       }
     },
-    usersSuccess: (state, action) => {
+    receiveUsers: (state, action) => {
       state.loading = false;
       state.error = null;
       state.isLogedIn = true;
-      state.users = action.payload;
+      state.users = [action.payload, ...state.users];
+       //state.users = action.payload;
     },
-    usersFail: (state, action) => {
+   addNewUser: (state, action) => {
+     state.loading = false;
+     state.error = null;
+     state.isLogedIn = true;
+     state[action.payload.id] = action.payload;
+   },
+    receiveUsersFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
       state.isLogedIn = false;
-      state.isLogedOut = false;
       state.users = [];
+    },
+    resetAuthenticatedUsers: (state, action) => {
+      return { ...initialState };
     },
   },
 });
 
 // Actions
-export const getAllUsers = () => async (dispatch) => {
-  dispatch(usersLoading());
+export const getAllInitialsUsers = (users) => async (dispatch) => {
+  dispatch(receieveUsersLoading())
   try {
-    const response = await API._getUsers();
-
-    console.log(response);
-    dispatch(usersSuccess(response));
+    dispatch(receiveUsers(users));
   } catch (error) {
     console.error(error);
-    dispatch(usersFail(error.message));
+    dispatch(receiveUsersFail(error.message));
   }
 };
 
-export const { usersLoading, usersSuccess, usersFail } = usersSlice.actions;
+export const { receieveUsersLoading, receiveUsers, receiveUsersFail } =
+  usersSlice.actions;
 
 export default usersSlice.reducer;

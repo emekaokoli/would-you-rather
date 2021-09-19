@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const Questions = () => {
+export const Leaderboard = () => {
   return (
     <>
-      questions screen
+      Leaderboard
     </>
   )
 }
