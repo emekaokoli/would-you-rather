@@ -1,13 +1,13 @@
 
 import { createSlice } from '@reduxjs/toolkit';
-import { getInitialData,saveQuestion } from '../services/api';
+import { getInitialData,saveQuestion, saveQuestionAnswer } from '../services/api';
 import { getAllInitialsUsers } from './users.slice.reducers';
 
 
 const initialState = {
   loading: true,
   error: null,
-  quesions: [],
+  questions: [],
 };
 
 export const questionSlice = createSlice({
@@ -19,15 +19,17 @@ export const questionSlice = createSlice({
       if (state.loading) {
         state.loading = true;
         state.error = null;
-        state.quesions = [];
+        state.questions = [];
       }
     },
     receiveQuestions: (state, action) => {
       state.loading = false;
       state.error = null;
-      state.quesions = action.payload;
+      state.questions = action.payload;
     },
     addQuestion: (state, action) => {
+      console.log('payload');
+      console.log(action.payload);
       state.loading = false;
       state.error = null;
       state[action.payload.id] = action.payload;
@@ -41,7 +43,7 @@ export const questionSlice = createSlice({
     receieveQuestionsFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      state.quesions = [];
+      state.questions = [];
     },
     reset: (state) => {
       return { ...initialState };
@@ -51,13 +53,11 @@ export const questionSlice = createSlice({
   extraReducers: {},
 });
 
-// Actions
-export const getAllQuestions = () => async (dispatch) => {
+// Actions for initial get request for questions and users
+export const getAllData = () => async (dispatch) => {
   dispatch(receiveQuestionsLoading());
   try {
     const { users, questions } = await getInitialData();
-
-    console.log(questions);
     dispatch(receiveQuestions(questions));
     dispatch(getAllInitialsUsers(users))
   } catch (error) {
@@ -75,17 +75,29 @@ export const {
   addAnswer,
 } = questionSlice.actions;
 
-export const handleNewQuestion = (newQuestionInfo) => async (dispatch) => {
+export const handleSaveNewQuestion = (newQuestionInfo) => async (dispatch) => {
+  console.log('submited data');
+  console.log(newQuestionInfo);
   return saveQuestion(newQuestionInfo).then((question) =>
     dispatch(addQuestion(question)),
   );
 };
 
-export const getQuestions = (state) => state.questions;
-export const getSortedQuestionsIDs = (state) => {
-  return Object.keys(state.questions).sort(
-    (a, b) => state.questions[b].timestamp - state.questions[a].timestamp
+export const handleSaveNewAnswer = (info) => async (dispatch) => {
+  return saveQuestionAnswer(info).then((newAnswer) =>
+    dispatch(addAnswer(newAnswer)),
   );
 };
+
+export const getCurrentQuestions = (state) => state.questions.questions;
+
+export const getSortedQuestionsIDs = (state) => {
+ 
+  return Object.keys(state.questions.questions).sort(
+    (a, b) =>
+      state.questions.questions[b].timestamp - state.questions.questions[a].timestamp,
+  );
+};
+
 
 export default questionSlice.reducer;

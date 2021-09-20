@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const PageNotFound = () => {
+export const NotAnswered = () => {
   return (
     <>
-      not found
+      NotAnswered
     </>
   )
 }

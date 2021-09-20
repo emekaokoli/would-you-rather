@@ -5,7 +5,7 @@ import { combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import questionsSlice from './questions.slice.reducers';
 import usersSlice from './users.slice.reducers';
-import authenticatedUser from './authenticatedUser.slice.reducer';
+import authUserSlice from './authenticateUser.slice.reducer';
 
 
 // const persistConfig = {
@@ -17,7 +17,7 @@ import authenticatedUser from './authenticatedUser.slice.reducer';
 const reducers = combineReducers({
   questions: questionsSlice,
   users: usersSlice,
-  auth: authenticatedUser,
+  auth: authUserSlice,
 });
 //const persistedReducer = persistReducer(persistConfig, reducers);
 

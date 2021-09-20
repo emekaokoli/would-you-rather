@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addQuestion,addAnswer } from './questions.slice.reducers';
+// import { saveQuestion } from '../services/api';
+// import { addQuestion,addAnswer } from './questions.slice.reducers';
+
 const initialState = {
     loading: true,
     error: null,
-    isLogedIn: false,
     users: [],
   }
 
@@ -16,27 +17,29 @@ export const usersSlice = createSlice({
       if (state.loading) {
         state.loading = true;
         state.error = null;
-        state.isLogedIn = false;
         state.users = [];
       }
     },
     receiveUsers: (state, action) => {
       state.loading = false;
       state.error = null;
-      state.isLogedIn = true;
-      state.users = [action.payload, ...state.users];
-       //state.users = action.payload;
+      //state.users = [action.payload, ...state.users];
+      state.users = action.payload;
     },
-   addNewUser: (state, action) => {
-     state.loading = false;
-     state.error = null;
-     state.isLogedIn = true;
-     state[action.payload.id] = action.payload;
-   },
+    // addQuestion: (state, action) => {
+    //   state.loading = false;
+    //   state.error = null;
+    //   state[action.payload.id] = action.payload;
+    // },
+
+    // AddAnswer: (state, action) => {
+    //   state.loading = false;
+    //   state.error = null;
+    //   state[action.payload.id] = action.payload;
+    // },
     receiveUsersFail: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      state.isLogedIn = false;
       state.users = [];
     },
     resetAuthenticatedUsers: (state, action) => {
@@ -56,7 +59,11 @@ export const getAllInitialsUsers = (users) => async (dispatch) => {
   }
 };
 
+
+
 export const { receieveUsersLoading, receiveUsers, receiveUsersFail } =
   usersSlice.actions;
+
+  
 
 export default usersSlice.reducer;

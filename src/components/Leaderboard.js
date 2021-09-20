@@ -3,7 +3,7 @@ import React from 'react'
 export const Leaderboard = () => {
   return (
     <>
-      Leaderboard
+      Leaderboard works
     </>
   )
 }
