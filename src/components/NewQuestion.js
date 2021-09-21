@@ -21,9 +21,8 @@ export const NewQuestion = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(handleSaveNewQuestion({ optionOne, optionTwo, author })).then(() =>
-      dispatch(getAllData()),
-    );
+    dispatch(handleSaveNewQuestion({ optionOne, optionTwo, author }))
+     .then(() => dispatch(getAllData()));
     setOptionOne('');
     setOptionTwo('');
     history.push('/dashboard');

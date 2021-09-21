@@ -38,16 +38,16 @@ export const Dashboard = () => {
     return (
       <ListGroup as='ul' className='contact-list'>
         {questionsArray.map((questionID) => {
-          const questionAuthor = users[questions[questionID].author].name;
-          const authorsID = questions[questionID].author;
-          const questionPreview = questions[questionID].optionOne.text;
+          const author = users[questions[questionID].author].name;
+          const authorId = questions[questionID].author;
+          const preview = questions[questionID].optionOne.text;
           return (
             <Preview
               key={questionID}
               id={questionID}
-              avatar={users[authorsID].avatarURL}
-              questionAuthor={questionAuthor}
-              questionPreview={questionPreview}
+              avatar={users[authorId].avatarURL}
+              author={author}
+              preview={preview}
             />
           );
         })}

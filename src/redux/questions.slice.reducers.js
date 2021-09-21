@@ -28,11 +28,20 @@ export const questionSlice = createSlice({
       state.questions = action.payload;
     },
     addQuestion: (state, action) => {
-      console.log('payload');
-      console.log(action.payload);
+       console.log('payload');
+       console.log({
+         ...state.questions.questions,
+         ...action.payload,
+       });
+       console.log('payload');
+      
       state.loading = false;
       state.error = null;
-      state[action.payload.id] = action.payload;
+      state.questions[action.payload.id] = {
+        ...state.questions.questions,
+        ...action.payload,
+      };
+       //state.questions.questions[action.payload.id] = action.payload;
 
     },
     addAnswer: (state, action) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Container } from 'react-bootstrap';
 import {
   BrowserRouter as Router,
@@ -7,21 +7,17 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { NavComponent } from './NavComponent';
-import {Questions} from './Questions'
-import {NewQuestion} from './NewQuestion'
-import {Leaderboard} from './Leaderboard'
+import { Questions } from './Questions';
+import { NewQuestion } from './NewQuestion';
+import { Leaderboard } from './Leaderboard';
 import { PageNotFound } from './NotFound';
 import { Dashboard } from './Dashboard';
 import { useSelector } from 'react-redux';
 import { Login } from './Login';
-//import { LogOut } from './LogOut';
-
-
-
 
 export const PrivateRoute = () => {
   const auth = useSelector((state) => state.auth);
-  const {authedUser} = auth
+  const { authedUser } = auth;
   return (
     <Router>
       <Container>
@@ -43,4 +39,4 @@ export const PrivateRoute = () => {
       </Container>
     </Router>
   );
-}
+};

@@ -6,11 +6,12 @@ import { getAuthenticatedUser } from '../redux/authenticateUser.slice.reducer';
 export const Login = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users);
-  const [userID, setUserId] = useState('');
-  const [errMess, setErrMess] = useState(null);
   const auth = useSelector((state) => state.auth);
   const { users, loading, error } = user;
   const { authedUser } = auth;
+
+  const [userID, setUserId] = useState('');
+  const [errMess, setErrMess] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
