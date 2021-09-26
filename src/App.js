@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllData } from './redux/questions.slice.reducers';
+import { fetchQuestion } from './redux/questions.slice.reducers';
 import './App.css';
 import { PrivateRoute } from './components/PrivateRoute';
 import { Login } from './components/Login';
@@ -13,7 +13,7 @@ function App() {
   const { authedUser } = auth;
 
   useEffect(() => {
-    dispatch(getAllData());
+    dispatch(fetchQuestion());
   }, [dispatch]);
 
   if (loading) {

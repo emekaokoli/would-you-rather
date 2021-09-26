@@ -4,13 +4,13 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
-  getAllData,
+  fetchQuestion,
   handleSaveNewQuestion,
 } from '../redux/questions.slice.reducers';
 
 export const NewQuestion = () => {
-  const [optionOne, setOptionOne] = useState('');
-  const [optionTwo, setOptionTwo] = useState('');
+  const [optionOneText, setOptionOne] = useState('');
+  const [optionTwoText, setOptionTwo] = useState('');
 
   const history = useHistory();
 
@@ -21,8 +21,9 @@ export const NewQuestion = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(handleSaveNewQuestion({ optionOne, optionTwo, author }))
-     .then(() => dispatch(getAllData()));
+    dispatch(
+      handleSaveNewQuestion({ optionOneText, optionTwoText, author }),
+    ).then(() => dispatch(fetchQuestion()));
     setOptionOne('');
     setOptionTwo('');
     history.push('/dashboard');
@@ -48,7 +49,7 @@ export const NewQuestion = () => {
           aria-label='Question one'
           aria-describedby='Question one'
           onChange={(e) => setOptionOne(e.target.value)}
-          value={optionOne}
+          value={optionOneText}
         />
       </Form.Group>
       <Form.Text className='font-weight-bold'>OR</Form.Text>
@@ -60,14 +61,14 @@ export const NewQuestion = () => {
           aria-label='Question two'
           aria-describedby='Question two'
           onChange={(e) => setOptionTwo(e.target.value)}
-          value={optionTwo}
+          value={optionTwoText}
         />
       </Form.Group>
       <Button
         type='submit'
         className='m-3'
         variant='success'
-        disabled={optionOne === '' || optionTwo === ''}
+        disabled={optionOneText === '' || optionTwoText === ''}
       >
         Submit
       </Button>

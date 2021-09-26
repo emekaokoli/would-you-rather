@@ -7,7 +7,7 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { NavComponent } from './NavComponent';
-import { Questions } from './Questions';
+import { QuestionDetail } from './QuestionDetail';
 import { NewQuestion } from './NewQuestion';
 import { Leaderboard } from './Leaderboard';
 import { PageNotFound } from './NotFound';
@@ -29,7 +29,7 @@ export const PrivateRoute = () => {
         <main className='justify-content-center text-center'>
           <NavComponent />
           <Switch>
-            <Route path='/question/:id' component={Questions} />
+            <Route path='/question/:id' component={QuestionDetail} />
             <Route path='/dashboard' component={Dashboard} />
             <Route path='/addquestion' component={NewQuestion} />
             <Route path='/leaderboard' component={Leaderboard} />

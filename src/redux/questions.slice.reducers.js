@@ -1,80 +1,127 @@
-
-import { createSlice } from '@reduxjs/toolkit';
-import { getInitialData,saveQuestion, saveQuestionAnswer } from '../services/api';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import {
+  getInitialData,
+  saveQuestion,
+  saveQuestionAnswer,
+} from '../services/api';
 import { getAllInitialsUsers } from './users.slice.reducers';
 
-
 const initialState = {
-  loading: true,
+  loading: false,
   error: null,
   questions: [],
 };
+
+export const fetchQuestion = createAsyncThunk(
+  'questions/fetchQuestion',
+
+  async (thunkAPI) => {
+    const { users, questions } = await getInitialData();
+    thunkAPI.dispatch(getAllInitialsUsers(users));
+    return questions;
+  },
+);
+
+
+export const handleSaveNewQuestion = createAsyncThunk(
+  'SaveQuestions/handleSaveNewQuestion',
+  async ({ newQuestionInfo }, thunkAPI) => {
+    const question = await saveQuestion(newQuestionInfo);
+    return question;
+  },
+);
+
+export const handleSaveNewAnswer = createAsyncThunk(
+  'SaveAnswer/handleSaveNewAnswer',
+  async ({ info }, thunkAPI) => {
+    const newAnswer = await saveQuestionAnswer(info);
+    return newAnswer;
+  },
+);
+
+export const resetState = createAsyncThunk(
+  'ResetQuestions/fetchQuestion',
+  async (thunkAPI) => {
+    return reset;
+  },
+);
 
 export const questionSlice = createSlice({
   name: 'QUESTIONS',
   initialState,
 
   reducers: {
-    receiveQuestionsLoading: (state, action) => {
-      if (state.loading) {
-        state.loading = true;
-        state.error = null;
-        state.questions = [];
-      }
-    },
-    receiveQuestions: (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state.questions = action.payload;
-    },
+    receiveQuestionsLoading: (state, action) => {},
+    receiveQuestions: (state, action) => {},
     addQuestion: (state, action) => {
-       console.log('payload');
-       console.log({
-         ...state.questions.questions,
-         ...action.payload,
-       });
-       console.log('payload');
-      
-      state.loading = false;
-      state.error = null;
-      state.questions[action.payload.id] = {
-        ...state.questions.questions,
-        ...action.payload,
-      };
-       //state.questions.questions[action.payload.id] = action.payload;
-
+      //state.questions.questions[action.payload.id] = action.payload;
     },
-    addAnswer: (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state[action.payload.id] = action.payload;
-    },
-    receieveQuestionsFail: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-      state.questions = [];
-    },
+    addAnswer: (state, action) => {},
+    receieveQuestionsFail: (state, action) => {},
     reset: (state) => {
       return { ...initialState };
     },
   },
 
-  extraReducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(fetchQuestion.pending, (state, action) => {
+        if (!state.loading) {
+          state.loading = true;
+          state.error = null;
+          state.questions = [];
+        }
+      })
+      .addCase(fetchQuestion.fulfilled, (state, action) => {
+        if (state.loading === true) {
+          state.loading = false;
+          state.error = null;
+          state.questions.push(action.payload);
+        }
+      })
+      .addCase(fetchQuestion.rejected, (state, action) => {
+        if (state.loading === true) {
+          state.loading = false;
+          state.error = action.payload;
+          state.questions = [];
+        }
+      })
+      .addCase(handleSaveNewQuestion.fulfilled, (state, action) => {
+        if (state.loading === true) {
+          state.loading = false;
+          state.error = null;
+          state.questions[action.payload.id] = {
+            ...state.questions.questions,
+            ...action.payload,
+          };
+        }
+      })
+      .addCase(handleSaveNewQuestion.rejected, (state, action) => {
+        if (state.loading === true) {
+          state.loading = false;
+          state.error = action.payload;
+          state.questions = [];
+        }
+      })
+      .addCase(handleSaveNewAnswer.fulfilled, (state, action) => {
+        if (state.loading === true) {
+          state.loading = false;
+          state.error = null;
+          state[action.payload.id] = action.payload;
+        }
+      })
+      .addCase(handleSaveNewAnswer.rejected, (state, action) => {
+        if (state.loading === true) {
+          state.loading = false;
+          state.error = action.payload;
+          state.questions = [];
+        }
+      })
+      .addCase(resetState.fulfilled, (state, action) => {
+        return { ...initialState };
+      });
+  },
 });
-
-// Actions for initial get request for questions and users
-export const getAllData = () => async (dispatch) => {
-  dispatch(receiveQuestionsLoading());
-  try {
-    const { users, questions } = await getInitialData();
-    dispatch(receiveQuestions(questions));
-    dispatch(getAllInitialsUsers(users))
-  } catch (error) {
-    console.error(error);
-    dispatch(receieveQuestionsFail(error.message));
-
-  }
-};
 
 export const {
   receiveQuestionsLoading,
@@ -82,31 +129,17 @@ export const {
   receieveQuestionsFail,
   addQuestion,
   addAnswer,
+  reset,
 } = questionSlice.actions;
-
-export const handleSaveNewQuestion = (newQuestionInfo) => async (dispatch) => {
-  console.log('submited data');
-  console.log(newQuestionInfo);
-  return saveQuestion(newQuestionInfo).then((question) =>
-    dispatch(addQuestion(question)),
-  );
-};
-
-export const handleSaveNewAnswer = (info) => async (dispatch) => {
-  return saveQuestionAnswer(info).then((newAnswer) =>
-    dispatch(addAnswer(newAnswer)),
-  );
-};
 
 export const getCurrentQuestions = (state) => state.questions.questions;
 
 export const getSortedQuestionsIDs = (state) => {
- 
   return Object.keys(state.questions.questions).sort(
     (a, b) =>
-      state.questions.questions[b].timestamp - state.questions.questions[a].timestamp,
+      state.questions.questions[b].timestamp -
+      state.questions.questions[a].timestamp,
   );
 };
-
 
 export default questionSlice.reducer;
