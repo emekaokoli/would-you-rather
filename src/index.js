@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './redux/configure.store';
+//import { getAllInitialsUsers } from './redux/users.slice.reducers';
+
+//store.dispatch(getAllInitialsUsers())
 
 ReactDOM.render(
   <React.StrictMode>

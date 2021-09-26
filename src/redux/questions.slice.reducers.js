@@ -4,7 +4,7 @@ import {
   saveQuestion,
   saveQuestionAnswer,
 } from '../services/api';
-import { getAllInitialsUsers } from './users.slice.reducers';
+import { receiveUsers } from './users.slice.reducers';
 
 const initialState = {
   loading: false,
@@ -15,9 +15,9 @@ const initialState = {
 export const fetchQuestion = createAsyncThunk(
   'questions/fetchQuestion',
 
-  async (thunkAPI) => {
-    const { users, questions } = await getInitialData();
-    thunkAPI.dispatch(getAllInitialsUsers(users));
+  async (_,thunkAPI) => {
+    const {users, questions } = await getInitialData();
+    thunkAPI.dispatch(receiveUsers(users));
     return questions;
   },
 );

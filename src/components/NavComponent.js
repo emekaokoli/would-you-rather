@@ -7,10 +7,9 @@ import { Figure } from 'react-bootstrap';
 
 export const NavComponent = () => {
   const auth = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.users);
+  const { users } = useSelector((state) => state.users);
 
   const { authedUser } = auth;
-  const { users } = user;
   const userphoto = users[authedUser].avatarURL;
 
   return (
