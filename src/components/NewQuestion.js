@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import {
-  fetchQuestion,
+  fetchQuestionsandUsers,
   handleSaveNewQuestion,
 } from '../redux/questions.slice.reducers';
 
@@ -23,7 +23,7 @@ export const NewQuestion = () => {
 
     dispatch(
       handleSaveNewQuestion({ optionOneText, optionTwoText, author }),
-    ).then(() => dispatch(fetchQuestion()));
+    ).then(() => dispatch(fetchQuestionsandUsers()));
     setOptionOne('');
     setOptionTwo('');
     history.push('/dashboard');

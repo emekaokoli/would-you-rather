@@ -8,7 +8,6 @@ import { store } from './redux/configure.store';
 //import { getAllInitialsUsers } from './redux/users.slice.reducers';
 
 //store.dispatch(getAllInitialsUsers())
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

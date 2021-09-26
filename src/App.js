@@ -1,25 +1,34 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchQuestion } from './redux/questions.slice.reducers';
+import { fetchQuestionsandUsers } from './redux/questions.slice.reducers';
 import './App.css';
 import { PrivateRoute } from './components/PrivateRoute';
 import { Login } from './components/Login';
 
 function App() {
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.users);
-  const { loading, error } = user;
-  const { authedUser } = auth;
+  const  { authedUser }  = useSelector((state) => state.auth);
+  const { loading, error } = useSelector((state) => state.users);
+
 
   useEffect(() => {
-    dispatch(fetchQuestion());
+    dispatch(fetchQuestionsandUsers());
   }, [dispatch]);
 
   if (loading) {
-    return <div>loadding...</div>;
-  }
-  if (error) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          justifyItems: 'center',
+          alignItems: 'center',
+        }}
+      >
+        loadding...
+      </div>
+    );
+  } else if (error) {
     return <div>{error}</div>;
   } else {
     return <>{authedUser === null ? <Login /> : <PrivateRoute />}</>;

@@ -13,11 +13,10 @@ import { Preview } from './Preview';
 export const Dashboard = () => {
   const questions = useSelector(getCurrentQuestions);
   const questionsSortedById = useSelector(getSortedQuestionsIDs);
-  const user = useSelector((state) => state.users);
-  const { users } = user;
+  const { users } = useSelector((state) => state.users);
+  console.log(users);
 
-  const auth = useSelector((state) => state.auth);
-  const { authedUser } = auth;
+  const { authedUser } = useSelector((state) => state.auth);
 
   const [viewAnsweredQuestions, setViewAnsweredQuestions] = useState(false);
 

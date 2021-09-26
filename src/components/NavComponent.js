@@ -6,10 +6,9 @@ import { NavLink } from 'react-router-dom';
 import { Figure } from 'react-bootstrap';
 
 export const NavComponent = () => {
-  const auth = useSelector((state) => state.auth);
+  const { authedUser } = useSelector((state) => state.auth);
   const { users } = useSelector((state) => state.users);
 
-  const { authedUser } = auth;
   const userphoto = users[authedUser].avatarURL;
 
   return (

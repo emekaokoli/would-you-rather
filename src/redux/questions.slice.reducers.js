@@ -12,16 +12,15 @@ const initialState = {
   questions: [],
 };
 
-export const fetchQuestion = createAsyncThunk(
-  'questions/fetchQuestion',
+export const fetchQuestionsandUsers = createAsyncThunk(
+  'questions+Users/fetchQuestionsandUsers',
 
-  async (_,thunkAPI) => {
-    const {users, questions } = await getInitialData();
+  async (_, thunkAPI) => {
+    const { users, questions } = await getInitialData();
     thunkAPI.dispatch(receiveUsers(users));
     return questions;
   },
 );
-
 
 export const handleSaveNewQuestion = createAsyncThunk(
   'SaveQuestions/handleSaveNewQuestion',
@@ -36,13 +35,6 @@ export const handleSaveNewAnswer = createAsyncThunk(
   async ({ info }, thunkAPI) => {
     const newAnswer = await saveQuestionAnswer(info);
     return newAnswer;
-  },
-);
-
-export const resetState = createAsyncThunk(
-  'ResetQuestions/fetchQuestion',
-  async (thunkAPI) => {
-    return reset;
   },
 );
 
@@ -63,23 +55,23 @@ export const questionSlice = createSlice({
     },
   },
 
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchQuestion.pending, (state, action) => {
+      .addCase(fetchQuestionsandUsers.pending, (state, action) => {
         if (!state.loading) {
           state.loading = true;
           state.error = null;
           state.questions = [];
         }
       })
-      .addCase(fetchQuestion.fulfilled, (state, action) => {
+      .addCase(fetchQuestionsandUsers.fulfilled, (state, action) => {
         if (state.loading === true) {
           state.loading = false;
           state.error = null;
           state.questions.push(action.payload);
         }
       })
-      .addCase(fetchQuestion.rejected, (state, action) => {
+      .addCase(fetchQuestionsandUsers.rejected, (state, action) => {
         if (state.loading === true) {
           state.loading = false;
           state.error = action.payload;
@@ -116,9 +108,6 @@ export const questionSlice = createSlice({
           state.error = action.payload;
           state.questions = [];
         }
-      })
-      .addCase(resetState.fulfilled, (state, action) => {
-        return { ...initialState };
       });
   },
 });

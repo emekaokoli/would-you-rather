@@ -3,9 +3,9 @@ import { combineReducers } from 'redux';
 //import { persistReducer } from 'redux-persist';
 //import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
-import questionsSlice from './questions.slice.reducers';
-import usersSlice from './users.slice.reducers';
-import authUserSlice from './authenticateUser.slice.reducer';
+import questions from './questions.slice.reducers';
+import users from './users.slice.reducers';
+import auth from './authenticateUser.slice.reducer';
 
 
 // const persistConfig = {
@@ -15,9 +15,9 @@ import authUserSlice from './authenticateUser.slice.reducer';
 // };
 
 const reducers = combineReducers({
-  questions: questionsSlice,
-  users: usersSlice,
-  auth: authUserSlice,
+  questions,
+  users,
+  auth,
 });
 //const persistedReducer = persistReducer(persistConfig, reducers);
 
