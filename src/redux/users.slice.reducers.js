@@ -12,22 +12,20 @@ export const usersSlice = createSlice({
   initialState,
 
   reducers: {
-    receieveUsersLoading: (state, action) => {},
     receiveUsers: (state, action) => {
       state.users = action.payload;
     },
-    receiveUsersFail: (state, action) => {},
     resetUser: (state, action) => {
       return { ...initialState };
     },
   },
 });
 
-export const {
-  receieveUsersLoading,
+export const {  
   receiveUsers,
-  receiveUsersFail,
   resetUser,
 } = usersSlice.actions;
 
+export const initializeAllUsers = (state) => state.users.users;
 export default usersSlice.reducer;
+

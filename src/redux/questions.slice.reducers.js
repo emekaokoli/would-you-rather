@@ -48,7 +48,6 @@ export const questionSlice = createSlice({
     addQuestion: (state, action) => {
       //state.questions.questions[action.payload.id] = action.payload;
     },
-    addAnswer: (state, action) => {},
     receieveQuestionsFail: (state, action) => {},
     reset: (state) => {
       return { ...initialState };

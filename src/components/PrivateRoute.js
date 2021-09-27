@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { NavComponent } from './NavComponent';
 import { NewQuestion } from './NewQuestion';
-import { Leaderboard } from './Leaderboard';
+import { LeaderBoard } from './LeaderBoard';
 import { PageNotFound } from './NotFound';
 import { Dashboard } from './Dashboard';
 import { useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ export const PrivateRoute = () => {
             <Route path='/question/:id' component={Preview} />
             <Route path='/dashboard' component={Dashboard} />
             <Route path='/addquestion' component={NewQuestion} />
-            <Route path='/leaderboard' component={Leaderboard} />
+            <Route path='/leaderboard' component={LeaderBoard} />
             <Route path='*' component={PageNotFound} />
           </Switch>
         </main>

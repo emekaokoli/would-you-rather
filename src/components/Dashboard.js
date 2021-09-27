@@ -9,15 +9,14 @@ import {
   getSortedQuestionsIDs,
 } from '../redux/questions.slice.reducers';
 import { Preview } from './Preview';
+import { initializeAllUsers } from '../redux/users.slice.reducers';
 
 export const Dashboard = () => {
   const questions = useSelector(sellectAllQuestions);
   const questionsSortedById = useSelector(getSortedQuestionsIDs);
-  const { users } = useSelector((state) => state.users);
+  const  users  = useSelector(initializeAllUsers);
 
   const { authedUser } = useSelector((state) => state.auth);
-
-  console.log(users[questions['8xf0y6ziyjabvozdd253nd']]);
 
   const [viewAnsweredQuestions, setViewAnsweredQuestions] = useState(false);
 
@@ -35,7 +34,7 @@ export const Dashboard = () => {
       return <h3 className='mt-3 text-danger'>No questions to show</h3>;
     }
     return (
-      <ListGroup as='ul' className='contact-list'>
+      <ListGroup as='ul'>
         {questionsArray.map((questionID) => {
           const author = users[questions[questionID].author].name;
           const authorId = questions[questionID].author;

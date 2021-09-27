@@ -17,7 +17,7 @@ export const Login = () => {
     if ((authedUser === null && userID) === '') {
       setErrMess('You must choose a username');
     } else {
-      dispatch(getAuthenticatedUser(userID));
+      dispatch(getAuthenticatedUser(userID)).unwrap();
     }
   };
 

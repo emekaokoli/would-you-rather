@@ -7,13 +7,11 @@ import { Provider } from 'react-redux';
 import { store } from './redux/configure.store';
 //import { fetchQuestionsandUsers } from './redux/questions.slice.reducers';
 
-//import { getAllInitialsUsers } from './redux/users.slice.reducers';
+// import { initializeAllUsers } from './redux/users.slice.reducers';
 
-//store.dispatch(getAllInitialsUsers())
+// store.dispatch(initializeAllUsers());
+// store.dispatch(fetchQuestionsandUsers());
 
-
-
-// store.dispatch(fetchQuestionsandUsers);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
