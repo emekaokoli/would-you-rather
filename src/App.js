@@ -8,7 +8,8 @@ import { Login } from './components/Login';
 function App() {
   const dispatch = useDispatch();
   const  { authedUser }  = useSelector((state) => state.auth);
-  const { loading, error } = useSelector((state) => state.users);
+  const { loading, error } = useSelector((state) => state.questions);
+  
 
 
   useEffect(() => {

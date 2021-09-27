@@ -121,7 +121,8 @@ export const {
   reset,
 } = questionSlice.actions;
 
-export const getCurrentQuestions = (state) => state.questions.questions;
+export const sellectAllQuestions = state => state.questions.questions;
+
 
 export const getSortedQuestionsIDs = (state) => {
   return Object.keys(state.questions.questions).sort(

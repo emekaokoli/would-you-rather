@@ -5,10 +5,8 @@ import { getAuthenticatedUser } from '../redux/authenticateUser.slice.reducer';
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const { users, loading, error } = useSelector((state) => state.users);
-  const auth = useSelector((state) => state.auth);
- 
-  const { authedUser } = auth;
+  const { users } = useSelector((state) => state.users);
+  const { authedUser, error } = useSelector((state) => state.auth);
 
   const [userID, setUserId] = useState('');
   const [errMess, setErrMess] = useState(null);
@@ -23,9 +21,6 @@ export const Login = () => {
     }
   };
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
   if (error) {
     <div>{error}</div>;
   } else {
@@ -53,7 +48,12 @@ export const Login = () => {
                   );
                 })}
               </Form.Select>
-              <Button type='submit' variant='outline-dark' className='mt-3'>
+              <Button
+                type='submit'
+                variant='outline-dark'
+                className='mt-3'
+                disabled={userID === ''}
+              >
                 Login
               </Button>
             </Form>

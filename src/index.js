@@ -5,9 +5,15 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { store } from './redux/configure.store';
+//import { fetchQuestionsandUsers } from './redux/questions.slice.reducers';
+
 //import { getAllInitialsUsers } from './redux/users.slice.reducers';
 
 //store.dispatch(getAllInitialsUsers())
+
+
+
+// store.dispatch(fetchQuestionsandUsers);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -15,8 +15,7 @@ export const NewQuestion = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
-  const { authedUser: author } = auth;
+  const  { authedUser: author } = useSelector((state) => state.auth);
 
   const onSubmit = (e) => {
     e.preventDefault();

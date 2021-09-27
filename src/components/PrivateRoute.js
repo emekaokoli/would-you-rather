@@ -7,13 +7,13 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { NavComponent } from './NavComponent';
-import { QuestionDetail } from './QuestionDetail';
 import { NewQuestion } from './NewQuestion';
 import { Leaderboard } from './Leaderboard';
 import { PageNotFound } from './NotFound';
 import { Dashboard } from './Dashboard';
 import { useSelector } from 'react-redux';
 import { Login } from './Login';
+import { Preview } from './Preview';
 
 export const PrivateRoute = () => {
   const auth = useSelector((state) => state.auth);
@@ -29,7 +29,7 @@ export const PrivateRoute = () => {
         <main className='justify-content-center text-center'>
           <NavComponent />
           <Switch>
-            <Route path='/question/:id' component={QuestionDetail} />
+            <Route path='/question/:id' component={Preview} />
             <Route path='/dashboard' component={Dashboard} />
             <Route path='/addquestion' component={NewQuestion} />
             <Route path='/leaderboard' component={Leaderboard} />

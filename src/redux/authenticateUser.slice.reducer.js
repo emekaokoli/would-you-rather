@@ -24,58 +24,30 @@ const authUserSlice = createSlice({
   reducers: {
     authenticate: (state, action) => {},
     authenticateFail: (state, action) => {
-      state.error = action.payload;
+      //state.error = action.payload;
     },
     resetAuth: (state, action) => {
       return {
         ...initialState,
       };
     },
-    resetAuthFail: (state, action) => {
+    authFail: (state, action) => {
       state.error = action.payload;
     },
   },
   extraReducers(builder) {
     builder
-      .addCase(getAuthenticatedUser.pending, (state, action) => {
-        if (!state.loading) {
-          state.loading = true;
-          state.error = null;
-          state.authedUser = [];
-        }
-      })
+
       .addCase(getAuthenticatedUser.fulfilled, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state.authedUser = action.payload;
-        }
+        state.authedUser = action.payload;
       })
       .addCase(getAuthenticatedUser.rejected, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state.authedUser = action.payload;
-        }
-      })
-      .addCase(handleResetAuth.fulfilled, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state.authedUser = action.payload;
-        }
-      })
-      .addCase(handleResetAuth.rejected, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state.authedUser = action.payload;
-        }
+        state.authedUser = action.payload;
       });
   },
 });
 
-export const { authenticate, authenticateFail, resetAuth, resetAuthFail } =
+export const { authenticate, authenticateFail, resetAuth, authFail } =
   authUserSlice.actions;
 
 export default authUserSlice.reducer;

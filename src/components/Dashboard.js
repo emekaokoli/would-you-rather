@@ -5,26 +5,26 @@ import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useSelector } from 'react-redux';
 import {
-  getCurrentQuestions,
+  sellectAllQuestions,
   getSortedQuestionsIDs,
 } from '../redux/questions.slice.reducers';
 import { Preview } from './Preview';
 
 export const Dashboard = () => {
-  const questions = useSelector(getCurrentQuestions);
+  const questions = useSelector(sellectAllQuestions);
   const questionsSortedById = useSelector(getSortedQuestionsIDs);
   const { users } = useSelector((state) => state.users);
-  console.log(users);
 
   const { authedUser } = useSelector((state) => state.auth);
+
+  console.log(users[questions['8xf0y6ziyjabvozdd253nd']]);
 
   const [viewAnsweredQuestions, setViewAnsweredQuestions] = useState(false);
 
   const questionsAnsweredByAuthedUser = Object.keys(users[authedUser].answers);
 
   const answeredQuestionsList = questionsSortedById.filter((question) =>
-    questionsAnsweredByAuthedUser.includes(question),
-  );
+    questionsAnsweredByAuthedUser.includes(question));
 
   const notAnsweredQuestionsList = questionsSortedById.filter(
     (question) => !answeredQuestionsList.includes(question),
@@ -40,11 +40,12 @@ export const Dashboard = () => {
           const author = users[questions[questionID].author].name;
           const authorId = questions[questionID].author;
           const preview = questions[questionID].optionOne.text;
+          const avatar = users[authorId].avatarURL
           return (
             <Preview
               key={questionID}
               id={questionID}
-              avatar={users[authorId].avatarURL}
+              avatar={avatar}
               author={author}
               preview={preview}
             />
