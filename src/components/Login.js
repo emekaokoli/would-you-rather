@@ -49,6 +49,11 @@ export const Login = () => {
                 })}
               </Form.Select>
               <Button
+                style={{
+                  display: 'flex',
+                  width: '100%',
+                  justifyContent: 'center',
+                }}
                 type='submit'
                 variant='outline-dark'
                 className='mt-3'

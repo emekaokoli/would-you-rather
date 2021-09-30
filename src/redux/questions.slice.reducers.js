@@ -104,7 +104,7 @@ export const questionSlice = createSlice({
       .addCase(handleSaveNewAnswer.rejected, (state, action) => {
         if (state.loading === true) {
           state.loading = false;
-          state.error = action.payload;
+          state.error = action.payload.message;
           state.questions = [];
         }
       });
