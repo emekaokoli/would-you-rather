@@ -3,9 +3,8 @@ import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { LeaderBoardCard } from './LeaderBoardCard';
 
-
-export const LeaderBoard = ()  =>{
-  const {users} = useSelector(state => state.users);
+export const LeaderBoard = () => {
+  const { users } = useSelector((state) => state.users);
 
   const sortedUsers = () => {
     const usersWithScores = Object.values(users).map((user) => {
@@ -25,7 +24,7 @@ export const LeaderBoard = ()  =>{
       {sortedUsers().map((user) => {
         const answeredQuestions = Object.keys(user.answers).length;
         const createdQuestions = user.questions.length;
-        const {id, avatarURL, name} = user
+        const { id, avatarURL, name } = user;
         return (
           <LeaderBoardCard
             key={id}
@@ -39,4 +38,4 @@ export const LeaderBoard = ()  =>{
       })}
     </Container>
   );
-}
+};

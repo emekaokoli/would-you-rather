@@ -14,7 +14,7 @@ import { initializeAllUsers } from '../redux/users.slice.reducers';
 export const Dashboard = () => {
   const questions = useSelector(sellectAllQuestions);
   const questionsSortedById = useSelector(getSortedQuestionsIDs);
-  const  users  = useSelector(initializeAllUsers);
+  const users = useSelector(initializeAllUsers);
 
   const { authedUser } = useSelector((state) => state.auth);
 
@@ -23,7 +23,8 @@ export const Dashboard = () => {
   const questionsAnsweredByAuthedUser = Object.keys(users[authedUser].answers);
 
   const answeredQuestionsList = questionsSortedById.filter((question) =>
-    questionsAnsweredByAuthedUser.includes(question));
+    questionsAnsweredByAuthedUser.includes(question),
+  );
 
   const notAnsweredQuestionsList = questionsSortedById.filter(
     (question) => !answeredQuestionsList.includes(question),
@@ -39,8 +40,8 @@ export const Dashboard = () => {
           const author = users[questions[questionID].author].name;
           const authorId = questions[questionID].author;
           const preview = questions[questionID].optionOne.text;
-          const avatar = users[authorId].avatarURL
-          
+          const avatar = users[authorId].avatarURL;
+
           return (
             <Preview
               key={questionID}

@@ -24,17 +24,15 @@ export const fetchQuestionsandUsers = createAsyncThunk(
 
 export const handleSaveNewQuestion = createAsyncThunk(
   'SaveQuestions/handleSaveNewQuestion',
-  async ( newQuestionInfo , thunkAPI) => {
-    console.log(newQuestionInfo);
-    return await saveQuestion(newQuestionInfo); 
+  async (newQuestionInfo, thunkAPI) => {
+    return await saveQuestion(newQuestionInfo);
   },
 );
 
 export const handleSaveNewAnswer = createAsyncThunk(
   'SaveAnswer/handleSaveNewAnswer',
-  async ( info, thunkAPI) => {
-    return  await saveQuestionAnswer(info);
-    
+  async (info, thunkAPI) => {
+    return await saveQuestionAnswer(info);
   },
 );
 
@@ -43,7 +41,7 @@ export const questionSlice = createSlice({
   initialState,
 
   reducers: {
-      reset: (state) => {
+    reset: (state) => {
       return { ...initialState };
     },
   },

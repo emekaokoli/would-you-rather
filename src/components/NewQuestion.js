@@ -15,7 +15,7 @@ export const NewQuestion = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const  { authedUser } = useSelector((state) => state.auth);
+  const { authedUser } = useSelector((state) => state.auth);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +34,6 @@ export const NewQuestion = () => {
 
   return (
     <Form className='mt-4' onSubmit={onSubmit}>
-      {/* <Form.Group> */}
       <Form.Text className='border- p-3' as='h3'>
         Create new Question
         <hr style={{ width: '30%' }} className='m-auto mt-2' />
@@ -43,7 +42,6 @@ export const NewQuestion = () => {
         Complete the question: Would you rather...
       </Form.Text>
 
-      {/* </Form.Group> */}
       <Form.Group>
         <Form.Control
           type='text'

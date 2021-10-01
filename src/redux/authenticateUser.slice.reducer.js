@@ -22,10 +22,6 @@ const authUserSlice = createSlice({
   initialState,
 
   reducers: {
-    authenticate: (state, action) => {},
-    authenticateFail: (state, action) => {
-      //state.error = action.payload;
-    },
     resetAuth: (state, action) => {
       return {
         ...initialState,
@@ -42,7 +38,7 @@ const authUserSlice = createSlice({
         state.authedUser = action.payload;
       })
       .addCase(getAuthenticatedUser.rejected, (state, action) => {
-        state.authedUser = action.payload;
+        state.authedUser = action.error.message;
       });
   },
 });

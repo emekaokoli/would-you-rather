@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 export const PageNotFound = () => {
@@ -6,8 +6,8 @@ export const PageNotFound = () => {
     <>
       Oops, page not found, hit the back button{' '}
       <Link to='/' className='btn button-narrow text-success'>
-       go back to Home
+        go back to Home
       </Link>
     </>
   );
-}
+};

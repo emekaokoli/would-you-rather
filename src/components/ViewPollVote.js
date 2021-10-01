@@ -16,10 +16,9 @@ export const ViewPollVote = ({
 }) => {
   const dispatch = useDispatch();
   const { authedUser } = useSelector((state) => state.auth);
-console.log(authedUser);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
-  const onSubmit = async(e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     await dispatch(
@@ -28,8 +27,8 @@ console.log(authedUser);
         qid: questionID,
         answer: selectedAnswer,
       }),
-    ).unwrap()
-   await  dispatch(fetchQuestionsandUsers());
+    ).unwrap();
+    await dispatch(fetchQuestionsandUsers());
   };
   return (
     <ListGroup as='ul' className=' user-card w-50 mx-auto border '>
