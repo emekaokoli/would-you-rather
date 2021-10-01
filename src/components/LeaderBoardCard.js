@@ -1,6 +1,7 @@
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import PropTypes from 'prop-types';
+import { Figure } from 'react-bootstrap';
 
 export const LeaderBoardCard = ({
   avatar,
@@ -12,14 +13,13 @@ export const LeaderBoardCard = ({
   return (
     <>
       <ListGroup as='ul' className='d-flex w-50 mx-auto border'>
-        <ListGroup.Item
-          className='contact-avatar avatar-leaderboard'
-          style={{
-            backgroundImage: `url(${avatar})`,
-          }}
-        />
-        <ListGroup.Item className=''>
-          <h5 className='card-header'>{user}</h5>
+        <ListGroup.Item as='li' className='align-content-center'>
+          <Figure className='align-content-center justify-content-center'>
+            <Figure.Image width={180} height={180} alt={avatar} src={avatar} />
+          </Figure>
+        </ListGroup.Item>
+        <ListGroup.Item as='li' className=''>
+          <h5 className='card-header bg-primary text-light'>{user}</h5>
           <p className='text-left d-flex justify-content-between mt-3 font-weight-bold'>
             Answered questions<span>{answeredQuestions}</span>
           </p>
@@ -27,8 +27,11 @@ export const LeaderBoardCard = ({
             Created questions<span>{createdQuestions}</span>
           </p>
         </ListGroup.Item>
-        <ListGroup.Item className='ml-3 d-flex flex-column justify-content-between'>
-          <h6 className='card-header'>Score</h6>
+        <ListGroup.Item
+          as='li'
+          className='ml-3 d-flex flex-column justify-content-between'
+        >
+          <h6 className='card-header bg-primary text-light'>Score</h6>
           <p className='number-circle'>{score}</p>
         </ListGroup.Item>
       </ListGroup>

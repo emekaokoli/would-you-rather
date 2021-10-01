@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Figure, Form, ListGroup } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchQuestionsandUsers,
@@ -16,31 +16,34 @@ export const ViewPollVote = ({
 }) => {
   const dispatch = useDispatch();
   const { authedUser } = useSelector((state) => state.auth);
-
+console.log(authedUser);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
-  const onSubmit = (e) => {
+  const onSubmit = async(e) => {
     e.preventDefault();
 
-    dispatch(
+    await dispatch(
       handleSaveNewAnswer({
         authedUser,
         qid: questionID,
         answer: selectedAnswer,
       }),
-    ).then(() => dispatch(fetchQuestionsandUsers()));
+    ).unwrap()
+   await  dispatch(fetchQuestionsandUsers());
   };
   return (
-    <li className=' user-card w-50 mx-auto border'>
-      <h5 className='card-header text-left '>{authorName} asks:</h5>
-      <div className='d-flex'>
-        <div
-          className='contact-avatar avatar-preview'
-          style={{
-            backgroundImage: `url(/${authorAvatar})`,
-          }}
-        />
-        <div className='contact-details'>
+    <ListGroup as='ul' className=' user-card w-50 mx-auto border '>
+      <h5 className='card-header text-left bg-primary'>{authorName} asks:</h5>
+      <ListGroup.Item as='li' className='d-flex'>
+        <Figure>
+          <Figure.Image
+            width={120}
+            height={120}
+            alt={authorAvatar}
+            src={authorAvatar}
+          />
+        </Figure>
+        <ListGroup.Item className='contact-details'>
           <h6 className='text-left pt-3'>Would you rather:</h6>
           <Form
             onSubmit={onSubmit}
@@ -66,9 +69,9 @@ export const ViewPollVote = ({
               Submit
             </Button>
           </Form>
-        </div>
-      </div>
-    </li>
+        </ListGroup.Item>
+      </ListGroup.Item>
+    </ListGroup>
   );
 };
 

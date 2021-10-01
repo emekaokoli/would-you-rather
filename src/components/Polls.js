@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import { ViewPollResults } from './ViewPollResults';
+import ViewPollResults from './ViewPollResults';
 import { ViewPollVote } from './ViewPollVote';
 
 export default function Poll(props) {

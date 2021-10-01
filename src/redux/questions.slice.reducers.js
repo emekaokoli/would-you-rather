@@ -7,7 +7,7 @@ import {
 import { receiveUsers } from './users.slice.reducers';
 
 const initialState = {
-  loading: false,
+  loading: true,
   error: null,
   questions: [],
 };
@@ -24,17 +24,17 @@ export const fetchQuestionsandUsers = createAsyncThunk(
 
 export const handleSaveNewQuestion = createAsyncThunk(
   'SaveQuestions/handleSaveNewQuestion',
-  async ({ newQuestionInfo }, thunkAPI) => {
-    const question = await saveQuestion(newQuestionInfo);
-    return question;
+  async ( newQuestionInfo , thunkAPI) => {
+    console.log(newQuestionInfo);
+    return await saveQuestion(newQuestionInfo); 
   },
 );
 
 export const handleSaveNewAnswer = createAsyncThunk(
   'SaveAnswer/handleSaveNewAnswer',
-  async ({ info }, thunkAPI) => {
-    const newAnswer = await saveQuestionAnswer(info);
-    return newAnswer;
+  async ( info, thunkAPI) => {
+    return  await saveQuestionAnswer(info);
+    
   },
 );
 
@@ -43,13 +43,7 @@ export const questionSlice = createSlice({
   initialState,
 
   reducers: {
-    receiveQuestionsLoading: (state, action) => {},
-    receiveQuestions: (state, action) => {},
-    addQuestion: (state, action) => {
-      //state.questions.questions[action.payload.id] = action.payload;
-    },
-    receieveQuestionsFail: (state, action) => {},
-    reset: (state) => {
+      reset: (state) => {
       return { ...initialState };
     },
   },
@@ -57,56 +51,39 @@ export const questionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchQuestionsandUsers.pending, (state, action) => {
-        if (!state.loading) {
-          state.loading = true;
-          state.error = null;
-          state.questions = [];
-        }
+        state.loading = true;
+        state.error = null;
+        state.questions = null;
       })
       .addCase(fetchQuestionsandUsers.fulfilled, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state.questions.push(action.payload);
-        }
+        state.loading = false;
+        state.error = null;
+        state.questions = action.payload;
       })
       .addCase(fetchQuestionsandUsers.rejected, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = action.payload;
-          state.questions = [];
-        }
+        state.loading = false;
+        state.error = action.error.message;
+        state.questions = [];
       })
       .addCase(handleSaveNewQuestion.fulfilled, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state.questions[action.payload.id] = {
-            ...state.questions.questions,
-            ...action.payload,
-          };
-        }
+        state.loading = false;
+        state.error = null;
+        state.questions[action.payload.id] = action.payload;
       })
       .addCase(handleSaveNewQuestion.rejected, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = action.payload;
-          state.questions = [];
-        }
+        state.loading = false;
+        state.error = action.error.message;
+        state.questions = [];
       })
       .addCase(handleSaveNewAnswer.fulfilled, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = null;
-          state[action.payload.id] = action.payload;
-        }
+        state.loading = false;
+        state.error = null;
+        state[action.payload] = action.payload;
       })
       .addCase(handleSaveNewAnswer.rejected, (state, action) => {
-        if (state.loading === true) {
-          state.loading = false;
-          state.error = action.payload.message;
-          state.questions = [];
-        }
+        state.loading = false;
+        state.error = action.error.message;
+        state.questions = [];
       });
   },
 });
@@ -120,8 +97,7 @@ export const {
   reset,
 } = questionSlice.actions;
 
-export const sellectAllQuestions = state => state.questions.questions;
-
+export const sellectAllQuestions = (state) => state.questions.questions;
 
 export const getSortedQuestionsIDs = (state) => {
   return Object.keys(state.questions.questions).sort(

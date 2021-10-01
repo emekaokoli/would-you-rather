@@ -16,15 +16,15 @@ export default function ViewPollResults({
   const optionTwoPercentage = (100 / (totalVotes / optionTwoVotes)).toFixed(0);
 
   return (
-    <ListGroup className=' user-card w-50 mx-auto border'>
-      <h5 className='card-header text-left '> Asked by {authorName}</h5>
+    <ListGroup className=' user-card w-50 mx-auto border bg-primary'>
+      <h5 className='card-header text-left text-light'> Asked by {authorName}</h5>
       <ListGroup.Item className='d-flex'>
         <Figure>
           <Figure.Image
             width={120}
             height={120}
             alt={authorAvatar}
-            src={`url(/${authorAvatar})`}
+            src={authorAvatar}
           />
         </Figure>
       </ListGroup.Item>
@@ -36,7 +36,7 @@ export default function ViewPollResults({
             <h6 className='font-weight-light card-header'>
               {optionOne}
               {selectedAnswer === 'optionOne' && (
-                <span className='selected-badge badge badge-pill badge-warning'>
+                <span className='selected-badge badge badge-pill badge-warning text-dark'>
                   Your answer
                 </span>
               )}

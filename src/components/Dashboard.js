@@ -40,6 +40,7 @@ export const Dashboard = () => {
           const authorId = questions[questionID].author;
           const preview = questions[questionID].optionOne.text;
           const avatar = users[authorId].avatarURL
+          
           return (
             <Preview
               key={questionID}

@@ -13,7 +13,7 @@ export const usersSlice = createSlice({
 
   reducers: {
     receiveUsers: (state, action) => {
-      state.users = action.payload;
+      state.users = action.payload
     },
     resetUser: (state, action) => {
       return { ...initialState };

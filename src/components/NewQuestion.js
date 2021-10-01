@@ -15,13 +15,17 @@ export const NewQuestion = () => {
   const history = useHistory();
 
   const dispatch = useDispatch();
-  const  { authedUser: author } = useSelector((state) => state.auth);
+  const  { authedUser } = useSelector((state) => state.auth);
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     dispatch(
-      handleSaveNewQuestion({ optionOneText, optionTwoText, author }),
+      handleSaveNewQuestion({
+        optionOneText,
+        optionTwoText,
+        author: authedUser,
+      }),
     ).then(() => dispatch(fetchQuestionsandUsers()));
     setOptionOne('');
     setOptionTwo('');

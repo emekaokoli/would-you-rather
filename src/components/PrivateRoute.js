@@ -13,7 +13,7 @@ import { PageNotFound } from './NotFound';
 import { Dashboard } from './Dashboard';
 import { useSelector } from 'react-redux';
 import { Login } from './Login';
-import { Preview } from './Preview';
+import  Poll  from './Polls';
 
 export const PrivateRoute = () => {
   const auth = useSelector((state) => state.auth);
@@ -29,7 +29,7 @@ export const PrivateRoute = () => {
         <main className='justify-content-center text-center'>
           <NavComponent />
           <Switch>
-            <Route path='/question/:id' component={Preview} />
+            <Route path='/question/:id' component={Poll} />
             <Route path='/dashboard' component={Dashboard} />
             <Route path='/addquestion' component={NewQuestion} />
             <Route path='/leaderboard' component={LeaderBoard} />
