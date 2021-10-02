@@ -13,7 +13,7 @@ What would be the point of seeing answered and unanswered polling questions if w
 . React-Bootstrap
 . React Router
 
-## To run the locally
+## To install 
 
 `just npm to install packages and depencies`
 
@@ -24,6 +24,15 @@ or
 `yarn packages and depencies`
 
 `yarn`
+
+## To run the app
+
+
+`npm to start`
+
+or
+
+`yarn start`
 
 After that open [local host](https://locahost:3000) in your browser to view
 ## DB Notice
@@ -123,3 +132,8 @@ This project is bootstraped [Create React App](https://github.com/facebook/creat
 ## Contributing
 
 This repository is for demo only. Therefore, I most likely will not accept pull requests.
+
+## Connect with me
+github: @emekaokoli
+instagram: @ookli
+twitter: @emecaokoli

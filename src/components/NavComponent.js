@@ -21,7 +21,7 @@ export const NavComponent = () => {
         <Nav.Link
           eventKey='dashboard'
           as={NavLink}
-          to='/dashboard'
+          to='/'
           activeStyle={{
             fontWeight: 'bold',
             color: 'blue',
@@ -34,7 +34,7 @@ export const NavComponent = () => {
         <Nav.Link
           eventKey='newquestion'
           as={NavLink}
-          to='/addquestion'
+          to='/add'
           activeStyle={{
             fontWeight: 'bold',
             color: 'blue',
