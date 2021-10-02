@@ -6,6 +6,7 @@ import {
   handleSaveNewAnswer,
 } from '../redux/questions.slice.reducers';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router';
 
 export const ViewPollVote = ({
   authorName,
@@ -18,6 +19,8 @@ export const ViewPollVote = ({
   const { authedUser } = useSelector((state) => state.auth);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
+ const history =  useHistory()
+
   const onSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,6 +32,7 @@ export const ViewPollVote = ({
       }),
     ).unwrap();
     await dispatch(fetchQuestionsandUsers());
+    history.push(`/question/${questionID}`);
   };
   return (
     <ListGroup as='ul' className=' user-card w-50 mx-auto border '>
