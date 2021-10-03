@@ -3,35 +3,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Card } from 'react-bootstrap';
 import { getAuthenticatedUser } from '../redux/authenticateUser.slice.reducer';
 import { useHistory, useLocation } from 'react-router-dom';
-//import {Redirect} from 'react-router-dom'
 
 export const Login = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const { users } = useSelector((state) => state.users);
   const { authedUser, error } = useSelector((state) => state.auth);
 
   const [userID, setUserId] = useState('');
   const [errMess, setErrMess] = useState(null);
-  //const [redirectToReferrer, setRedirectToReferrer] = React.useState(false);
 
-  const history = useHistory()
   const { state } = useLocation();
-console.log(state);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if ((authedUser === null && userID) === '') {
       setErrMess('You must choose a username');
     } else {
-      dispatch(getAuthenticatedUser(userID)).unwrap();
-      //setRedirectToReferrer(true)
-      history.push(state?.from || '/');
+      dispatch(getAuthenticatedUser(userID)).then(() => {
+        history.push(state?.from || '/');
+      });
     }
   };
 
-  if (error) { 
+  if (error) {
     <div>{error}</div>;
-  } else { 
+  } else {
     return (
       <div className='d-flex justify-content-center pt-5 mt-5'>
         <Card style={{ width: '20rem', height: '15rem' }}>

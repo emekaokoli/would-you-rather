@@ -19,7 +19,7 @@ export const ViewPollVote = ({
   const { authedUser } = useSelector((state) => state.auth);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
 
- const history =  useHistory()
+  const history = useHistory();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -31,8 +31,9 @@ export const ViewPollVote = ({
         answer: selectedAnswer,
       }),
     ).unwrap();
-    await dispatch(fetchQuestionsandUsers());
-    history.push(`/question/${questionID}`);
+    await dispatch(fetchQuestionsandUsers()).then(() =>
+      history.push(`/question/${questionID}`),
+    );
   };
   return (
     <ListGroup as='ul' className=' user-card w-50 mx-auto border '>

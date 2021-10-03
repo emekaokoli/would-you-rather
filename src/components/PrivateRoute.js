@@ -10,7 +10,7 @@ export const PrivateRoute = ({ children, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={(props, { location }) => {
+      render={({ location }) => {
         return authedUser === null ? (
           <Redirect
             to={{

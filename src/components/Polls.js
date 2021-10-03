@@ -5,12 +5,12 @@ import { Redirect } from 'react-router-dom';
 import ViewPollResults from './ViewPollResults';
 import { ViewPollVote } from './ViewPollVote';
 
-export default function Poll(props) {
+export default function Poll({ match }) {
   const { users } = useSelector((state) => state.users);
   const { questions } = useSelector((state) => state.questions);
   const { authedUser } = useSelector((state) => state.auth);
 
-  const questionID = props.match.params.id;
+  const questionID = match.params.id;
 
   if (!questions[questionID]) {
     return <Redirect to='/error' />;

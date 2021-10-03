@@ -14,24 +14,12 @@ What would be the point of seeing answered and unanswered polling questions if w
 . React Router
 
 ## To install 
-
-`just npm to install packages and depencies`
-
 `npm to install`
-
 or
-
-`yarn packages and depencies`
-
 `yarn`
-
 ## To run the app
-
-
-`npm to start`
-
+`npm start`
 or
-
 `yarn start`
 
 After that open [local host](https://locahost:3000) in your browser to view
@@ -133,7 +121,7 @@ This project is bootstraped [Create React App](https://github.com/facebook/creat
 
 This repository is for demo only. Therefore, I most likely will not accept pull requests.
 
-## Connect with me
+## Connect with the engineer.
 github: @emekaokoli
 instagram: @ookli
 twitter: @emecaokoli

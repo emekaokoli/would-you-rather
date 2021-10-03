@@ -44,25 +44,34 @@ function App() {
   return (
     <BrowserRouter>
       <Container>
-        {authedUser === null ? (
-          <Login />
-        ) : (
-          <main className='justify-content-center text-center'>
-            <NavComponent />
-            <Switch>
-              <Route  path='/login' render={(props) => <Login {...props}/>} />
-              <PrivateRoute exact path='/' component={Dashboard} />
-              <PrivateRoute exact path='/add' component={NewQuestion} />
-              <PrivateRoute exact path='/question/:id' component={Poll} />
-              <PrivateRoute exact path='/leaderboard' component={LeaderBoard} />
-              <Route
-                exact
-                path='*'
-                render={(props) => <PageNotFound {...props} />}
-              />
-            </Switch>
-          </main>
-        )}
+        <Route
+          path='/'
+          render={() => (authedUser !== null ? <NavComponent /> : null)}
+        />
+        <main className='justify-content-center text-center'>
+          <Switch>
+            <Route
+              exact
+              path='/login'
+              render={(props) => <Login {...props} />}
+            />
+            <PrivateRoute exact path='/'>
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute exact path='/add'>
+              <NewQuestion />
+            </PrivateRoute>
+            <PrivateRoute exact path='/question/:id'>
+              <Route render={(props) => <Poll {...props} />} />
+            </PrivateRoute>
+            <PrivateRoute exact path='/leaderboard'>
+              <LeaderBoard />
+            </PrivateRoute>
+            <Route path='*'>
+              <PageNotFound />
+            </Route>
+          </Switch>
+        </main>
       </Container>
     </BrowserRouter>
   );

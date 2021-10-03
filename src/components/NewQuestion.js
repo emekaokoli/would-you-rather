@@ -29,7 +29,7 @@ export const NewQuestion = () => {
     ).then(() => dispatch(fetchQuestionsandUsers()));
     setOptionOne('');
     setOptionTwo('');
-    history.push('/dashboard');
+    history.push('/');
   };
 
   return (
